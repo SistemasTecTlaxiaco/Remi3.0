@@ -1,105 +1,93 @@
-# Create NEAR App
-===============
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/nearprotocol/create-near-app) 
+Example of NEAR Wallet integration
+==================================
 
-Quickly build apps backed by the [NEAR](https://near.org) blockchain
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/near-examples/wallet-example)
 
+<!-- MAGIC COMMENT: DO NOT DELETE! Everything above this line is hidden on NEAR Examples page -->
 
-## Prerequisites
+This example demonstrates how to integrate your application with NEAR Wallet.
+The contract is quite simple. It can store the account_id of last sender and return it. It also shows how you can debug contracts using logs.
 
-Make sure you have a [current version of Node.js](https://nodejs.org/en/about/releases/) installed – we are targeting versions `16+`.
+## Getting started
 
-Read about other [prerequisites](https://docs.near.org/develop/prerequisites) in our docs.
+There are two ways to run this project. The first is the quick and a good way to instantly become familiar with this example.
+Once familiar, the next step is for a developer to create their own NEAR account and deploy the contract to testnet. This is covered in the following section.
 
-## Getting Started
+There's a button at the top of this file that says "Open in Gitpod." This will open the project in a new tab with an integrated development environment. The other option is to clone this repository and follow the same instructions.
 
-To create a new NEAR project run this and follow interactive prompts:
+### Quickest option
 
-    npx create-near-app
+1. Install dependencies:
 
-> If you've previously installed `create-near-app` globally via `npm install -g create-near-app`, please uninstall the package using `npm uninstall -g create-near-app` to ensure that `npx` always uses the latest version.
-
-Follow the instructions in the README.md in the project you just created! 🚀
-
-You can create contracts written in:
-
-- [JavaScript](https://docs.near.org/develop/quickstart-guide)
-- [Rust](https://docs.near.org/develop/prerequisites)
-- AssemblyScript
-
-You can create a frontend template in:
-
-- [React](https://reactjs.org/)
-- Vanilla JavaScript
-
-For testing we use a sandboxed environment of NEAR (called Workspaces).
-You can write the tests in JavaScript or Rust.
-
-### Using CLI arguments to run `create-near-app`
-
-This CLI supports arguments to skip interactive prompts:
-
-```shell
-npx create-near-app
-  <project-name>
-  --contract js|rust|assemblyscript
-  --frontend vanilla|react|none
-  --tests js|rust
-  --install
+```
+yarn --frozen-lockfile
 ```
 
-Use `--install` to automatically install dependencies from all `package.json` files.
+2. Build and deploy this smart contract to a development account. This development account will be created automatically and is not intended for reuse:
 
-When using arguments, all arguments are required, except for `--install`.
+```
+yarn dev
+```
 
-## Getting Help
+Your command line which will display a link to localhost similar to:
+```bash
+Server running at http://localhost:1234
+```
 
-Check out our [documentation](https://docs.near.org) or chat with us on [Discord](http://near.chat). We'd love to hear from you!
+Please open that link your browser to continue and see how to log in with NEAR Wallet in a simple webapp.
+
+### Standard deploy option
+In this second option, the smart contract will get deployed to a specific account created with the NEAR Wallet.
+
+1. Ensure `near-cli` is installed by running:
+
+```
+near --version
+```
+
+If needed, install `near-cli`:
+
+```
+npm install near-cli -g
+```
+
+2. If you do not have a NEAR account, please create one with [NEAR Wallet](wallet.testnet.near.org).
+
+In the project root, login with `near-cli` by following the instructions after this command:
+
+```
+near login
+```
+
+3. Modify the top of `src/config.js`, changing the `CONTRACT_NAME` to be the NEAR account that was just used to log in.
+
+```javascript
+…
+const CONTRACT_NAME = process.env.CONTRACT_NAME || 'YOUR_ACCOUNT_NAME_HERE'; /* TODO: fill this in! */
+…
+```
+
+4. Start the example!
+
+```
+yarn start
+```
+
+## To Test
+
+```
+yarn asp // as-pect tests
+yarn jest // integration tests
+yarn test // both
+```
+
+## To Explore
+
+- `assembly/main.ts` for the contract code
+- `src/index.html` for the front-end HTML
+- `src/main.js` for the JavaScript front-end code and how to integrate contracts
+- `src/test.js` for the JS tests for the contract
 
 
-## Contributing to `create-near-app`
-
-To make changes to `create-near-app` itself:
-
-* clone the repository (Windows users, [use `git clone -c core.symlinks=true`](https://stackoverflow.com/a/42137273/249801))
-* in your terminal, enter one of the folders inside `templates`, such as `templates/vanilla`
-* now you can run `npm install` to install dependencies and `npm run dev` to run the local development server, just like you can in a new app created with `create-near-app`
-
-
-#### About commit messages
-
-`create-near-app` uses semantic versioning and auto-generates nice release notes & a changelog all based off of the commits. We do this by enforcing [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). In general the pattern mostly looks like this:
-
-    type(scope?): subject  #scope is optional; multiple scopes are supported (current delimiter options: "/", "\" and ",")
-
-Real world examples can look like this:
-
-    chore: run tests with GitHub Actions
-
-    fix(server): send cors headers
-
-    feat(blog): add comment section
-
-If your change should show up in release notes as a feature, use `feat:`. If it should show up as a fix, use `fix:`. Otherwise, you probably want `refactor:` or `chore:`. [More info](https://github.com/conventional-changelog/commitlint/#what-is-commitlint)
-
-
-#### Deploy `create-near-app`
-
-If you want to deploy a new version, you will need two prerequisites:
-
-1. Get publish-access to [the NPM package](https://www.npmjs.com/package/near-api-js)
-2. Get write-access to [the GitHub repository](https://github.com/near/near-api-js)
-3. Obtain a [personal access token](https://gitlab.com/profile/personal_access_tokens) (it only needs the "repo" scope).
-4. Make sure the token is [available as an environment variable](https://github.com/release-it/release-it/blob/master/docs/environment-variables.md) called `GITHUB_TOKEN`
-
-Then run one script:
-
-    npm run release
-
-Or just `release-it`
-
-
-## License
-
-This repository is distributed under the terms of both the MIT license and the Apache License (Version 2.0).
-See [LICENSE](LICENSE) and [LICENSE-APACHE](LICENSE-APACHE) for details.
+## Data collection
+By using Gitpod in this project, you agree to opt-in to basic, anonymous analytics. No personal information is transmitted. Instead, these usage statistics aid in discovering potential bugs and user flow information.
