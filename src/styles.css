@@ -8,7 +8,7 @@ html {
   --bg: #7861e0;
   --fg:#000000; /**remi titulo*/
   --primary: #5e809a;
-  --secondary: #270c8a;
+  --secondary: #00648b;
   --tertiary: #5d7e99;
 
   background-color: var(--bg);
@@ -21,7 +21,7 @@ html {
 @media (prefers-color-scheme: dark) {
   html {
     --bg: #ffffff; /*background*/
-    --fg: #000000;
+    --fg: #000000;/*color fuente*/
   }
 }
 
