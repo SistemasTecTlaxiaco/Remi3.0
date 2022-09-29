@@ -5,11 +5,11 @@
 html, body { height: 100% }
 
 html {
-  --bg: #fff;
-  --fg: #25282A;
-  --primary: #FF585D;
-  --secondary: #6AD1E3;
-  --tertiary: #0072CE;
+  --bg: #7861e0;
+  --fg:#000000; /**remi titulo*/
+  --primary: #5e809a;
+  --secondary: #270c8a;
+  --tertiary: #5d7e99;
 
   background-color: var(--bg);
   color: var(--fg);
@@ -20,8 +20,8 @@ html {
 }
 @media (prefers-color-scheme: dark) {
   html {
-    --bg: #25282A;
-    --fg: #fff;
+    --bg: #ffffff; /*background*/
+    --fg: #000000;
   }
 }
 
@@ -41,10 +41,10 @@ a[href]:focus { color: var(--secondary) }
 a[href]:active { color: var(--tertiary) }
 
 button {
-  background: transparent;
+  background: #5d7e99;
   border-radius: 5px;
   border: 0.25em solid var(--primary);
-  color: inherit;
+  color: #ffffff;
   cursor: pointer;
   font: inherit;
   padding: 0.5em 1em;
